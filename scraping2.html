@@ -1,0 +1,50 @@
+<html>
+	<head>
+		<title>200 Most Popular Movies in 2021</title>
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script type="text/javascript">
+			$(function () {
+				$.get("./movies.json", function (obj) {
+					var str = "<table>";
+
+					str += `<tr>
+                    <th>No</th>
+                    <th>Gambar</th>
+                    <th>Judul</th>
+                    <th>Durasi</th>
+                    <th>Director</th>
+                    <th>Genre</th>
+                    <th>Starring</th>
+                </tr>`;
+
+					$.each(obj, function (n, data) {
+						str += "<tr><td>" + (n + 1) + "</td>";
+						str += "<td><img src=\"images/" + data.imageName + "\"></td>";
+						str += "<td>" + data.title + "</td>";
+						str += "<td>" + data.duration + "</td>";
+                        str += "<td>" + data.director + "</td>";
+                        str += "<td>" + data.genre + "</td>";
+						str += "<td>" + data.starring + "</td></tr>";
+					});
+
+					str += "</table>";
+					$("#movies_json").html(str);
+				});
+			});
+		</script>
+		<link rel="stylesheet" href="dist/css/style.css" />
+		<script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
+		<link
+			href="https://fonts.googleapis.com/css?family=Heebo:400,700|IBM+Plex+Sans:600"
+			rel="stylesheet"
+		/>
+	</head>
+	<body class="is-boxed has-animations">
+		<div class="body-wrap boxed-container">
+			<main>
+				<h1 class="hero-title mt-0" style="margin-top: 54px;margin-left: 16px">200 Most Popular Movies in 2021</h1>
+				<div id="movies_json" style="margin: 0 16px"></div>
+			</main>
+		</div>
+	</body>
+</html>
